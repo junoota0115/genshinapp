@@ -15,6 +15,7 @@ class CreateCharactersTable extends Migration
     {
         Schema::create('characters', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('img_path');
             $table->string('name');
             $table->integer('attribute_id');
             $table->integer('weapon_id');
