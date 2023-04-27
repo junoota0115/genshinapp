@@ -21,6 +21,10 @@ class CreateCharactersTable extends Migration
             $table->integer('weapon_id');
             $table->text('comment');
             $table->timestamps();
+            //追加  
+            // $table->foreign('attribute_id')
+            //       ->references('id')
+            //       ->on('attributes');
         });
     }
 

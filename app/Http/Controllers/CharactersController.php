@@ -9,11 +9,22 @@ use App\Models\Character;
 class CharactersController extends Controller
 {
     //
-    public function index(){
-        $model = new Character();
-        $characters = $model->showIndex();
+    public function index(Request $request){
+        $search = $request->input('search');
+        $query = Character::query();
 
-        return view('index',['characters'=>$characters]);
+        if(!empty($search)) {
+            $query->where('name', 'LIKE', "%{$search}%")
+                ->orWhere('attribute_id', 'LIKE', "%{$search}%");
+        }
+        $characters = $query->get();
+        return view('index', compact('characters', 'search'));
+
+
+        // $model = new Character();
+        // $characters = $model->showIndex();
+
+        // return view('index',['characters'=>$characters]);
     }
 
     public function create(){

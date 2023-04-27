@@ -53,12 +53,12 @@
 
             <div class="form-group">
                 <label for="comment">コメント</label>
-                <textarea class="form-control" id="comment" name="comment" placeholder="Comment" value="{{$character->comment}}"></textarea>
+                <textarea class="form-control" id="comment" name="comment" placeholder="Comment" >{{old("comment",$character->comment)}}</textarea>
             </div>
             <br>
             <div class="form-group">
                 <label for="img_path">画像添付</label>
-                <div><input type="file" id="img_path" name="img_path" value="{{$character->img_path}}"></div>
+                <div><input type="file" id="img_path" name="img_path" ></div>
             </div>
             <br>
             <button type="submit" class="btn btn-default">更新</button>

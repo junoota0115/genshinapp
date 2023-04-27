@@ -6,7 +6,11 @@
 
 <h1>詳細表示</h1>
 <div>
-<img src="{{ Storage::url($character->img_path) }}" width="400">
+    @if ($character->img_path !==NULL)
+    <img src="{{ Storage::url($character->img_path) }}" width="700"  >
+    @else
+   <img src="{{ Storage::url("noimage.png") }}" width="700" alt="noimage"></a>
+    @endif
 </div>
 
 <div>
@@ -30,5 +34,6 @@
 </div>
 
 <a href="/edit/{{$character->id}}">編集</a>
+<a href="/delete/{{$character->id}}">削除</a>
 
 @endsection

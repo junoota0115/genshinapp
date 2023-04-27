@@ -22,6 +22,7 @@ Auth::routes();
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 //Top
 Route::get('/index', [App\Http\Controllers\CharactersController::class, 'index'])->name('index');
+
 //登録ページ
 Route::get('/create', [App\Http\Controllers\CharactersController::class, 'create'])->name('create');
 //登録

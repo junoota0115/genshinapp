@@ -18,6 +18,10 @@ class Character extends Model
         'weapon_id',
         'comment',
     ];
+
+    // public function attributes() {
+    //     return $this->hasMany('App\Attribute');
+    // }
     
     // use HasFactory;
     public function showIndex(){
@@ -44,7 +48,8 @@ class Character extends Model
             DB::rollback();
             abort(500);
         }
-        // Session::flash('err_msg','登録しました');
+        $request->session()->flash('message', 'キャラクターを追加しました');
+        // return redirect()->route('text.index');
     }
 
     public function showDetail($id){
@@ -93,6 +98,7 @@ class Character extends Model
             abort(500);
         }
         // Session::flash('err_msg','登録しました');
+        $request->session()->flash('message', 'キャラクターを更新しました');
     }
 
   
