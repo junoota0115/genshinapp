@@ -26,7 +26,7 @@
             <div class="card-body">
               <h5 class="card-title">{{$character->name}}</h5>
               <p class="card-text">
-               <div> {{$character->attribute_id}}</div>
+               <div> {{$character->attribute}}</div>
                 <div>{{$character->weapon_id}}</div></p>
                 <a href="/detail/{{$character->id}}" class="btn btn-primary">Go somewhere</a>
                 

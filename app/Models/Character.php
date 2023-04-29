@@ -14,14 +14,15 @@ class Character extends Model
     protected $fillable = [
         'img_path',
         'name',
-        'attribute_id',
+        'attribute',
         'weapon_id',
         'comment',
     ];
 
-    // public function attributes() {
-    //     return $this->hasMany('App\Attribute');
-    // }
+    public function attribute()
+    {
+        return $this->belongsTo(Attribute::class);
+    }
     
     // use HasFactory;
     public function showIndex(){

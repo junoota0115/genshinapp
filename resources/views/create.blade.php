@@ -17,22 +17,15 @@
                 @endif
             </div>
 
-            <div class="form-group">
-                <label for="attribute_id">属性</label>
-                <select name="attribute_id" class="form-control" id="attribute_id"  placeholder="Attribute">
-                    <option value=""></option>
-                    <option value="1">風</option>
-                    <option value="2">炎</option>
-                    <option value="3">水</option>
-                    <option value="4">雷</option>
-                    <option value="5">氷</option>
-                    <option value="6">岩</option>
-                    <option value="7">草</option>
-                </select>
-                @if($errors->has('attribute_id'))
-                <p>{{$errors->first('attribute_id')}}</p>
-                @endif
-            </div>
+            <!--  カテゴリープルダウン -->
+      <div class="form-group">
+        <label for="attribute">{{ __('カテゴリー') }}<span class="badge badge-danger ml-2">{{ __('必須') }}</span></label>
+        <select class="form-control" id="attribute" name="attribute">
+            @foreach(config('attribute') as $attribute_id => $class)
+            <option value="{{ $attribute_id }}" {{ old('attribute_id') === $attribute_id ? "selected" : ""}}>{{ $class }}</option>
+          @endforeach
+        </select>
+      </div>
 
             <div class="form-group">
                 <label for="weapon">武器</label>

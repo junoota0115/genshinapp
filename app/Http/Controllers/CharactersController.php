@@ -15,7 +15,7 @@ class CharactersController extends Controller
 
         if(!empty($search)) {
             $query->where('name', 'LIKE', "%{$search}%")
-                ->orWhere('attribute_id', 'LIKE', "%{$search}%");
+                ->orWhere('attribute', 'LIKE', "%{$search}%");
         }
         $characters = $query->get();
         return view('index', compact('characters', 'search'));

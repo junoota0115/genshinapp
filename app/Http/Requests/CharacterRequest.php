@@ -25,7 +25,7 @@ class CharacterRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255',
-            'attribute_id' => 'required',
+            'attribute' => 'required',
             'weapon_id' => 'required',
             
         ];
@@ -35,7 +35,7 @@ class CharacterRequest extends FormRequest
     {
         return [
             'name.required' => '入力してください',
-            'attribute_id.required' => '未入力です',
+            'attribute.required' => '未入力です',
             'weapon_id.required' => '未入力です',
         ];
         
