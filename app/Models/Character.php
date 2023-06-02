@@ -8,13 +8,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\CharacterRequest;
 
+
 class Character extends Model
 {
     protected $table = 'characters';
     protected $fillable = [
         'img_path',
         'name',
-        'attribute',
+        'attribute_id',
         'weapon_id',
         'comment',
     ];
@@ -27,6 +28,7 @@ class Character extends Model
     // use HasFactory;
     public function showIndex(){
         $characters = Character::all();
+
         return $characters;
     }
 
@@ -45,12 +47,11 @@ class Character extends Model
             DB::commit();
         }catch(\Throwable $e){
             $error_code = $e->getMessage();
-            // dd($error_code);
+            echo($error_code);
             DB::rollback();
             abort(500);
         }
         $request->session()->flash('message', 'キャラクターを追加しました');
-        // return redirect()->route('text.index');
     }
 
     public function showDetail($id){
@@ -72,13 +73,18 @@ class Character extends Model
 
     public function exeUpdate(CharacterRequest $request){
         $inputs = $request->all();
-        // dd($inputs);
-        if(isset($inputs['img_path'])){
+        //画像が新しく選択された場合はstorageに保存する
+        if(!empty($inputs['img_path'])){                
             $file = $request->file('img_path');
             $extension = $file->getClientOriginalName();
             $inputs['img_path'] = $extension;
-            $file->move('storage',$extension);
+            $file->move('storage',$extension); 
+        }else{
+        //もし画像が新しく選択されなければ現在のデータを拾ってきた後に、画像のカラムに現在入っているデータをもう一度挿入する
+            $inputs = Character::where('id','=',$inputs['id'])->first(); 
+            $inputs->img_path = $inputs->img_path;                       
         }
+
         DB::beginTransaction();
         try{
         $character = Character::find($inputs['id']);
@@ -89,16 +95,14 @@ class Character extends Model
             'comment'=>$inputs['comment'],
             'img_path'=>$inputs['img_path'],
         ]);
-    
             $character->save();
             DB::commit();
         }catch(\Throwable $e){
             $error_code = $e->getMessage();
-            dd($error_code);
+            echo($error_code);
             DB::rollback();
             abort(500);
         }
-        // Session::flash('err_msg','登録しました');
         $request->session()->flash('message', 'キャラクターを更新しました');
     }
 

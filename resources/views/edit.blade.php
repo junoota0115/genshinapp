@@ -5,7 +5,7 @@
 
 <div class="container">
     <div class="row">
-        <h1>登録フォーム</h1>
+        <h1>編集フォーム</h1>
         <form action="{{route('update')}}" method="post" enctype="multipart/form-data">
             @csrf
 
@@ -20,32 +20,29 @@
             </div>
 
             <div class="form-group">
-                <label for="attribute_id">属性</label>
-                <select name="attribute_id" class="form-control" id="attribute_id"  placeholder="Attribute" value="{{$character->attribute_id}}">
-                    <option value=""></option>
-                    <option value="1">風</option>
-                    <option value="2">炎</option>
-                    <option value="3">水</option>
-                    <option value="4">雷</option>
-                    <option value="5">氷</option>
-                    <option value="6">岩</option>
-                    <option value="7">草</option>
-                </select>
+                <div><label for="attribute">元素</label></div>
+                <div class="form-group">
+                    @foreach ($attribute_tag as $att)
+                    <div class="form-check form-check-inline mb-3">
+                        <input class="form-check-input" type="radio" name="attribute_id" id="{{$att['id']}}" value="{{$att['id']}}" {{in_array($att['id'],$include_tags) ? 'checked' : ''}}>
+                        {{-- 3項演算子→ if文を1行で各方法{{条件 ? trueだったら : falseだったら}} --}}
+                        <label class="form-check-label" for="{{$att['id']}}">{{$att['class']}}</label>
+                        {{-- もし$include_tagsにループで回っているタグのidが含まれれば、checkedする --}}
+                    </div>
+                        @endforeach
                 @if($errors->has('attribute_id'))
                 <p>{{$errors->first('attribute_id')}}</p>
-                @endif
+                @endif 
             </div>
 
             <div class="form-group">
-                <label for="weapon">武器</label>
-                <select name="weapon_id" class="form-control" id="weapon_id"  placeholder="Weapon" value="{{$character->weapon_id}}">
-                    <option value=""></option>
-                    <option value="1">片手剣</option>
-                    <option value="2">大剣</option>
-                    <option value="3">長柄</option>
-                    <option value="4">法器</option>
-                    <option value="5">弓</option>
-                </select>
+                <div><label for="weapon">武器</label></div>
+                @foreach ($weapon_tag as $wept)
+                <div class="form-check form-check-inline mb-3">
+                    <input class="form-check-input" type="radio" name="weapon_id" id="{{$wept['id']}}" value="{{$wept['id']}}" {{in_array($wept['id'],$includes_tags) ? 'checked' : ''}}>
+                    <label class="form-check-label" for="{{$wept['id']}}">{{$wept['weapon_name']}}</label>
+                </div>
+                    @endforeach
                 @if($errors->has('weapon_id'))
                 <p>{{$errors->first('weapon_id')}}</p>
                 @endif

@@ -20,12 +20,12 @@
 
 <div>
 属性：
-{{$character->attribute_id}}
+{{$attribute_tag->class}}
 </div>
 
 <div>
 武器：
-{{$character->weapon_id}}
+{{$weapon_tag->weapon_name}}
 </div>
 
 <div>
@@ -33,7 +33,14 @@
 {{$character->comment}}
 </div>
 
-<a href="/edit/{{$character->id}}">編集</a>
-<a href="/delete/{{$character->id}}">削除</a>
+<a href="/edit/{{$character->id}}" class="btn btn-primary">編集</a>
+
+
+<form action="{{route('delete',$character->id)}}" method="post">
+    @csrf
+<input type="submit" value="削除します" class="btn btn-danger" onclick='return confirm("本当に削除しますか？")'>
+
 
 @endsection
+
+

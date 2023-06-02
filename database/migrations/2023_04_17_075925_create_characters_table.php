@@ -17,7 +17,7 @@ class CreateCharactersTable extends Migration
             $table->bigIncrements('id');
             $table->string('img_path');
             $table->string('name');
-            $table->string('attribute');
+            $table->integer('attribute_id');
             $table->integer('weapon_id');
             $table->text('comment');
             $table->timestamps();
