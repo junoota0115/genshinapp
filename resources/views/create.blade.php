@@ -16,34 +16,30 @@
                 <p>{{$errors->first('name')}}</p>
                 @endif
             </div>
+ 
+            <!--  カテゴリープルダウン -->
+      <div class="form-group">
+       <div><label for="attribute">元素</label></div>
+        @foreach ($attribute_tag as $att)
+        <div class="form-check form-check-inline mb-3">
+            <input class="form-check-input" type="radio" name="attribute_id" id="{{$att['class']}}" value="{{$att['id']}}" >
+            <label class="form-check-label" for="{{$att['class']}}">{{$att['class']}}</label>
+        </div>
+            @endforeach
+            @if($errors->has('attribute_id'))
+            <p>{{$errors->first('attribute_id')}}</p>
+            @endif
+      </div>
 
             <div class="form-group">
-                <label for="attribute_id">属性</label>
-                <select name="attribute_id" class="form-control" id="attribute_id"  placeholder="Attribute">
-                    <option value=""></option>
-                    <option value="1">風</option>
-                    <option value="2">炎</option>
-                    <option value="3">水</option>
-                    <option value="4">雷</option>
-                    <option value="5">氷</option>
-                    <option value="6">岩</option>
-                    <option value="7">草</option>
-                </select>
-                @if($errors->has('attribute_id'))
-                <p>{{$errors->first('attribute_id')}}</p>
-                @endif
-            </div>
+                <div><label for="weapon">武器</label></div>
+                @foreach ($weapon_tag as $wept)
+                <div class="form-check form-check-inline mb-3">
+                    <input class="form-check-input" type="radio" name="weapon_id" id="{{$wept['weapon_name']}}" value="{{$wept['id']}}">
+                    <label class="form-check-label" for="{{$wept['weapon_name']}}">{{$wept['weapon_name']}}</label>
+                </div>
+                    @endforeach
 
-            <div class="form-group">
-                <label for="weapon">武器</label>
-                <select name="weapon_id" class="form-control" id="weapon_id"  placeholder="Weapon">
-                    <option value=""></option>
-                    <option value="1">片手剣</option>
-                    <option value="2">大剣</option>
-                    <option value="3">長柄</option>
-                    <option value="4">法器</option>
-                    <option value="5">弓</option>
-                </select>
                 @if($errors->has('weapon_id'))
                 <p>{{$errors->first('weapon_id')}}</p>
                 @endif

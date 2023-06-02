@@ -30,9 +30,13 @@ Route::post('/upload', [App\Http\Controllers\CharactersController::class, 'uploa
 //詳細ページ
 Route::get('/detail/{id}', [App\Http\Controllers\CharactersController::class, 'detail'])->name('detail');
 //削除
-Route::get('/delete/{id}', [App\Http\Controllers\CharactersController::class, 'delete'])->name('delete');
+Route::post('/delete/{id}', [App\Http\Controllers\CharactersController::class, 'delete'])->name('delete');
 
 Route::get('/edit/{id}', [App\Http\Controllers\CharactersController::class, 'edit'])->name('edit');
 Route::post('/update', [App\Http\Controllers\CharactersController::class, 'update'])->name('update');
+
+//非同期削除
+Route::get('/search',[App\Http\Controllers\CharactersController::class, 'search'])->name('search');
+Route::post('/destroy',[App\Http\Controllers\CharactersController::class, 'destroy'])->name('destroy');
 
 
